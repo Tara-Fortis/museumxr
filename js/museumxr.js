@@ -2,7 +2,7 @@ const canvas = document.getElementById("renderCanvas");
 const engine = new BABYLON.Engine(canvas, true);
 
 const createScene = async function () {
-        const scene = new BABYLON.Scene(engine);
+    const scene = new BABYLON.Scene(engine);
 
     /*--  CAMERA --*/
     const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 15, new BABYLON.Vector3(0, 0, 0));
@@ -12,12 +12,14 @@ const createScene = async function () {
     const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
     light.intensity = 0.7;
     /*--  GROUND --*/
-    const ground = BABYLON.MeshBuilder.CreateGround("ground", {width: 10, height: 10}, scene);
+    const ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 20, height: 20 }, scene);
+
+    /*--  ROOM  --*/
+    const room = BABYLON.MeshBuilder.CreateBox("room", { width: 20, height: 20, depth: 20 }, scene);
     
-    /*--  WALLS / CELING --*/
 
     /*--  MESHES --*/
-    
+    // add four boxes to represent the museum exhibits
     // exhibit 1
     const box1 = BABYLON.MeshBuilder.CreateBox("box1", {}, scene);
     box1.position = new BABYLON.Vector3(-2.50, 0.50, 2.00);
