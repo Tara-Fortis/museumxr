@@ -24,10 +24,10 @@ const createScene = async function () {
 
     /*--  ROOM  --*/
     // create a room and add interior color
-    const room = BABYLON.MeshBuilder.CreateBox("room", { width: 20, height: 10.1, depth: 20 }, scene);
+    const room = BABYLON.MeshBuilder.CreateBox("room", { width: 20, height: 10.1, depth: 20, sideOrientation: BABYLON.Mesh.BACKSIDE }, scene);
     // add color to the room mesh
     const wallPaint = new BABYLON.StandardMaterial("wallPaint");
-    wallPaint.diffuseColr = new BABYLON.Color3(245, 199, 159);
+    wallPaint.diffuseColor = new BABYLON.Color3(2.45, 1.99, 1.59);
     room.material = wallPaint;
     // move the room up
     room.position.y = 4.9;
@@ -36,19 +36,19 @@ const createScene = async function () {
     // add four boxes to represent the museum exhibits
     // exhibit 1
     const box1 = BABYLON.MeshBuilder.CreateBox("box1", {}, scene);
-    box1.position = new BABYLON.Vector3(-2.50, 0.50, 2.00);
+    box1.position = new BABYLON.Vector3(-3.50, 1.50, 3.00);
 
     // exhibit 2
     const box2 = BABYLON.MeshBuilder.CreateBox("box2", {}, scene);
-    box2.position = new BABYLON.Vector3(3.00, 0.50, -3.00);
+    box2.position = new BABYLON.Vector3(4.00, 1.50, -4.00);
 
     // exhibit 3
     const box3 = BABYLON.MeshBuilder.CreateBox("box3", {}, scene);
-    box3.position = new BABYLON.Vector3(3.00, 0.50, 2.00);
+    box3.position = new BABYLON.Vector3(4.00, 1.50, 3.00);
 
     // exhibit 4
     const box4 = BABYLON.MeshBuilder.CreateBox("box4", {}, scene);
-    box4.position = new BABYLON.Vector3(-2.50, 0.50, -3.00);
+    box4.position = new BABYLON.Vector3(-3.50, 1.50, -4.00);
 
     return scene;
 };
