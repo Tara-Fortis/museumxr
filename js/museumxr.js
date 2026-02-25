@@ -5,18 +5,32 @@ const createScene = async function () {
     const scene = new BABYLON.Scene(engine);
 
     /*--  CAMERA --*/
-    const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 15, new BABYLON.Vector3(0, 0, 0));
+    const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 10, new BABYLON.Vector3(0, 0, 0));
     camera.attachControl(canvas, true);
 
     /*--  LIGHTING --*/
     const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
     light.intensity = 0.7;
+
     /*--  GROUND --*/
+    // create ground and add a wooden texture
     const ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 20, height: 20 }, scene);
+    // add wooden floor texture
+    const woodFloor = new BABYLON.StandardMaterial("woodFloor");
+    woodFloor.diffuseTexture = new BABYLON.Texture("./textures/albedo.png");
+    // remove shine
+    woodFloor.specularColor = new BABYLON.Color3(0, 0, 0);
+    ground.material = woodFloor;
 
     /*--  ROOM  --*/
-    const room = BABYLON.MeshBuilder.CreateBox("room", { width: 20, height: 20, depth: 20 }, scene);
-    
+    // create a room and add interior color
+    const room = BABYLON.MeshBuilder.CreateBox("room", { width: 20, height: 10.1, depth: 20 }, scene);
+    // add color to the room mesh
+    const wallPaint = new BABYLON.StandardMaterial("wallPaint");
+    wallPaint.diffuseColr = new BABYLON.Color3(245, 199, 159);
+    room.material = wallPaint;
+    // move the room up
+    room.position.y = 4.9;
 
     /*--  MESHES --*/
     // add four boxes to represent the museum exhibits
