@@ -68,7 +68,8 @@ const createScene = async function () {
     // shadow
 
     /*-- NIKE STATUE --*/
-    const nike = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "nike_of_samothrace.glb")
+    const nike = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "nike_of_samothrace.glb");
+    let nikeMesh = nike.meshes[0];
     // set Pivot Matrix to the statue's feet
     nikeMesh.setPivotMatrix(BABYLON.Matrix.Translation(0, 0, 0), false);
     // position
