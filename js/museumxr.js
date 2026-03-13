@@ -34,18 +34,47 @@ const createScene = async function () {
 
     /*--  MESHES --*/
     // add four boxes to represent the museum exhibits
-    // exhibit 1
+    // exhibit 1 (Crouching Aphrodite)
     const box1 = BABYLON.MeshBuilder.CreateBox("box1", {}, scene);
     box1.position = new BABYLON.Vector3(-3.50, 0.50, 3.00);
 
-    // exhibit 2
+    // exhibit 2 (Zeus)
     const box2 = BABYLON.MeshBuilder.CreateBox("box2", {}, scene);
     box2.position = new BABYLON.Vector3(4.00, 0.50, -4.00);
 
     // exhibit 3
     const box3 = BABYLON.MeshBuilder.CreateBox("box3", {}, scene);
     box3.position = new BABYLON.Vector3(4.00, 0.50, 3.00);
-    
+
+    /*-- CROUCHING APHRODITE --*/
+    const aphrodite = BABYLON.SceneLodader.ImportMeshAsync("", "./meshes", "aphrodite_crouching_british_museum.glb").then((result) => {
+        let aphroditeMesh = result.meshes[0];
+        // position
+        aphroditeMesh.position = new BABYLON.Vector3(-3.50, 1.50, 3.00);
+        // scale
+        // shadow
+    });
+    /*-- BUST OF ZEUS --*/
+    const zeus = BABYLON.SceneLodader.ImportMeshAsync("", "./meshes", "colossal_marble_bust_of_zeus.glb").then((result) => {
+        let zeusMesh = result.meshes[0];
+        // position
+        zeusMesh.position = new BABYLON.Vector3(4.00, 1.50, -4.00);
+        // scale
+        // shadow
+
+    });
+    /*-- NIKE STATUE --*/
+    const nike = BABYLON.SceneLodader.ImportMeshAsync("", "./meshes", "nike_of_samothrace.glb").then((result) => {
+        let nikeMesh = result.meshes[0];
+        // position
+        nikeMesh.position = new BABYLON.Vector3(4.00, 1.50, 3.00);
+        // scale
+        // shadow
+    });
+
+
+    /*--  GUI --*/
+
     return scene;
 };
 createScene().then((scene) => {
