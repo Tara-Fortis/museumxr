@@ -47,14 +47,14 @@ const createScene = async function () {
     box3.position = new BABYLON.Vector3(4.00, 0.50, 3.00);
 
     /*-- CROUCHING APHRODITE --*/
-    const aphrodite = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes", "aphrodite_crouching_british_museum.glb")
+    const aphrodite = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "aphrodite_crouching_british_museum.glb")
         let aphroditeMesh = result.meshes[0];
         // position
         aphroditeMesh.position = new BABYLON.Vector3(-3.50, 1.50, 3.00);
         // scale
         // shadow
     /*-- BUST OF ZEUS --*/
-    const zeus = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes", "colossal_marble_bust_of_zeus.glb")
+    const zeus = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "colossal_marble_bust_of_zeus.glb")
     let zeusMesh = result.meshes[0];
     // position
     zeusMesh.position = new BABYLON.Vector3(4.00, 1.50, -4.00);
@@ -62,7 +62,7 @@ const createScene = async function () {
     // shadow
 
     /*-- NIKE STATUE --*/
-    const nike = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes", "nike_of_samothrace.glb")
+    const nike = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "nike_of_samothrace.glb")
         let nikeMesh = result.meshes[0];
         // position
         nikeMesh.position = new BABYLON.Vector3(4.00, 1.50, 3.00);
