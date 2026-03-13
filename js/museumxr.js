@@ -49,24 +49,33 @@ const createScene = async function () {
     /*-- CROUCHING APHRODITE --*/
     const aphrodite = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "aphrodite_crouching_british_museum.glb")
     let aphroditeMesh = aphrodite.meshes[0];
+    // set Pivot Matrix to the statue's feet
+    aphroditeMesh.setPivotMatrix(BABYLON.Matrix.Translation(0, 0, 0), false);
     // position
     aphroditeMesh.position = new BABYLON.Vector3(-3.50, 1.50, 3.00);
-    // scale
+    // scale aphrodite up
+    aphroditeMesh.scaling = new BABYLON.Vector3(1.50, 1.50, 1.50);
     // shadow
     /*-- BUST OF ZEUS --*/
     const zeus = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "colossal_marble_bust_of_zeus.glb")
     let zeusMesh = zeus.meshes[0];
+    // set Pivot Matrix to the statue's feet
+    zeusMesh.setPivotMatrix(BABYLON.Matrix.Translation(0, 0, 0), false);
     // position
     zeusMesh.position = new BABYLON.Vector3(4.00, 1.50, -4.00);
-    // scale
+    // scale zeus down
+    zeusMesh.scaling = new BABYLON.Vector3(0.30, 0.30, 0.30);
     // shadow
 
     /*-- NIKE STATUE --*/
     const nike = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "nike_of_samothrace.glb")
-    let nikeMesh = nike.meshes[0];
+    // set Pivot Matrix to the statue's feet
+    nikeeMesh.setPivotMatrix(BABYLON.Matrix.Translation(0, 0, 0), false);
     // position
     nikeMesh.position = new BABYLON.Vector3(4.00, 1.50, 3.00);
-    // scale
+    // scale nike up
+    nikeMesh.scaling = new BABYLON.Vector3(1.50, 1.50, 1.50);
+
     // shadow
 
 
