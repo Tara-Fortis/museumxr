@@ -2,6 +2,9 @@ const canvas = document.getElementById("renderCanvas");
 const engine = new BABYLON.Engine(canvas, true);
 
 const createScene = async function () {
+    // add babylon inspector
+    scene.debugLayer.show();
+
     const scene = new BABYLON.Scene(engine);
 
     /*--  CAMERA --*/
