@@ -4,8 +4,6 @@ const engine = new BABYLON.Engine(canvas, true);
 const createScene = async function () {
 
     const scene = new BABYLON.Scene(engine);
-    // add babylon inspector
-    scene.debugLayer.show();
 
     /*--  CAMERA --*/
     const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 10, new BABYLON.Vector3(0, 0, 0));
@@ -30,42 +28,38 @@ const createScene = async function () {
     const room = BABYLON.MeshBuilder.CreateBox("room", { width: 20, height: 10.1, depth: 20, sideOrientation: BABYLON.Mesh.BACKSIDE }, scene);
     // add color to the room mesh
     const wallPaint = new BABYLON.StandardMaterial("wallPaint");
-    wallPaint.diffuseColor = new BABYLON.Color3(2.45, 1.99, 1.59);
+    wallPaint.diffuseColor = new BABYLON.Color3(0.96, 0.78, 0.62);
     room.material = wallPaint;
     // move the room up
     room.position.y = 4.9;
 
-    /*--  MESHES --*/
-    // add three podiums under each statue
-    // exhibit 1 (Crouching Aphrodite)
+    /*--  PODIUMS (mesh boxes) --*/
+    // podium 1 (Crouching Aphrodite)
     const box1 = BABYLON.MeshBuilder.CreateBox("box1", {}, scene);
     box1.position = new BABYLON.Vector3(-3.50, 0.50, 3.00);
+    
 
-    // exhibit 2 (Zeus)
+    // podium 2 (Zeus)
     const box2 = BABYLON.MeshBuilder.CreateBox("box2", {}, scene);
     box2.position = new BABYLON.Vector3(4.00, 0.50, -4.00);
 
-    // exhibit 3
+    // podium 3
     const box3 = BABYLON.MeshBuilder.CreateBox("box3", {}, scene);
     box3.position = new BABYLON.Vector3(4.00, 0.50, 3.00);
     box3.scaling = new BABYLON.Vector3(2, 1, 2);
 
     /*-- CROUCHING APHRODITE --*/
     const aphrodite = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "aphrodite_crouching_british_museum.glb")
-    let aphroditeMesh = aphrodite.meshes[0];
-    // set Pivot Matrix to the statue's feet
-    aphroditeMesh.setPivotMatrix(BABYLON.Matrix.Translation(0, 0, 0), false);
+    let aphroditeMesh = aphrodite.meshes[1];
     // position
     aphroditeMesh.position = new BABYLON.Vector3(-3.50, 0.50, 3.00);
     // scale aphrodite up
-    globalThis.debugNode.position = new BABYLON.Vector3();// (debugNode as BABYLON.Unknown)
     aphroditeMesh.scaling = new BABYLON.Vector3(0.10, 0.10, 0.10);
     // shadow
+
     /*-- BUST OF ZEUS --*/
     const zeus = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "colossal_marble_bust_of_zeus.glb")
-    let zeusMesh = zeus.meshes[0];
-    // set Pivot Matrix to the statue's feet
-    zeusMesh.setPivotMatrix(BABYLON.Matrix.Translation(0, 0, 0), false);
+    let zeusMesh = zeus.meshes[1];
     // position
     zeusMesh.position = new BABYLON.Vector3(4.00, 1.50, -4.00);
     // scale zeus down
@@ -74,9 +68,7 @@ const createScene = async function () {
 
     /*-- NIKE STATUE --*/
     const nike = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "nike_of_samothrace.glb");
-    let nikeMesh = nike.meshes[0];
-    // set Pivot Matrix to the statue's feet
-    nikeMesh.setPivotMatrix(BABYLON.Matrix.Translation(0, 0, 0), false);
+    let nikeMesh = nike.meshes[1];
     // position
     nikeMesh.position = new BABYLON.Vector3(4.00, 1.50, 3.00);
     // scale nike up
@@ -93,15 +85,15 @@ const createScene = async function () {
 
     const advancedTexture1 = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(plane1);
 
-    const button = BABYLON.GUI.Button.CreateSimpleButton("but", "Audio Description");
-    button.width = 0.7;
-    button.height = "60px";
-    button.color = "white";
-    button.fontSize = "50px"
-    button.background = "black";
-    button.cornerRadius = 40;
-    button.thickness = 4;
-    advancedTexture1.addControl(button);  
+    const button1 = BABYLON.GUI.Button.CreateSimpleButton("buttton1", "Audio Description");
+    button1.width = 0.7;
+    button1.height = "60px";
+    button1.color = "white";
+    button1.fontSize = "50px"
+    button1.background = "black";
+    button1.cornerRadius = 40;
+    button1.thickness = 4;
+    advancedTexture1.addControl(button);
     return scene;
 };
 createScene().then((scene) => {
