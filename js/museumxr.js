@@ -2,7 +2,7 @@ const canvas = document.getElementById("renderCanvas");
 const engine = new BABYLON.Engine(canvas, true);
 
 const createScene = async function () {
-
+    scene.debugLayer.show();
     const scene = new BABYLON.Scene(engine);
 
     /*--  CAMERA --*/
@@ -53,7 +53,7 @@ const createScene = async function () {
     let aphroditeMesh = aphrodite.meshes[0];
     console.log(aphroditeMesh);
     // position
-    aphroditeMesh.position = new BABYLON.Vector3(-3.50, 0.50, 3.00);
+    aphroditeMesh.position = new BABYLON.Vector3(-3.50, 1.00, 3.00);
     // scale aphrodite up
     aphroditeMesh.scaling = new BABYLON.Vector3(0.10, 0.10, 0.10);
     // shadow
@@ -62,7 +62,7 @@ const createScene = async function () {
     const zeus = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "colossal_marble_bust_of_zeus.glb")
     let zeusMesh = zeus.meshes[0];
     // position
-    zeusMesh.position = new BABYLON.Vector3(4.00, 1.50, -4.00);
+    zeusMesh.position = new BABYLON.Vector3(4.00, 1.00, -4.00);
     // scale zeus down
     zeusMesh.scaling = new BABYLON.Vector3(1.30, 1.30, 1.30);
     // shadow
@@ -71,7 +71,7 @@ const createScene = async function () {
     const nike = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "nike_of_samothrace.glb");
     let nikeMesh = nike.meshes[0];
     // position
-    nikeMesh.position = new BABYLON.Vector3(4.00, 1.50, 3.00);
+    nikeMesh.position = new BABYLON.Vector3(4.00, 1.00, 3.00);
     // scale nike up
     nikeMesh.scaling = new BABYLON.Vector3(0.50, 0.50, 0.50);
 
