@@ -4,7 +4,6 @@ const engine = new BABYLON.Engine(canvas, true);
 const createScene = async function () {
 
     const scene = new BABYLON.Scene(engine);
-    scene.debugLayer.show();
     /*--  CAMERA --*/
     const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 10, new BABYLON.Vector3(0, 0, 0));
     camera.attachControl(canvas, true);
@@ -34,10 +33,6 @@ const createScene = async function () {
     room.position.y = 4.9;
 
     /*--  PODIUMS (mesh boxes) --*/
-    // podium 1 (Crouching Aphrodite)
-    const box1 = BABYLON.MeshBuilder.CreateBox("box1", {}, scene);
-    box1.position = new BABYLON.Vector3(-3.50, 0.50, 3.00);
-    
 
     // podium 2 (Zeus)
     const box2 = BABYLON.MeshBuilder.CreateBox("box2", {}, scene);
@@ -72,6 +67,7 @@ const createScene = async function () {
     let nikeMesh = nike.meshes[0];
     // position
     nikeMesh.position = new BABYLON.Vector3(4.00, 1.00, 3.00);
+    nikeMesh.scaling = new BABYLON.Vector3(1.50, 1.50, 1.50);
 
     // shadow
 
