@@ -2,9 +2,9 @@ const canvas = document.getElementById("renderCanvas");
 const engine = new BABYLON.Engine(canvas, true);
 
 const createScene = async function () {
-    scene.debugLayer.show();
-    const scene = new BABYLON.Scene(engine);
 
+    const scene = new BABYLON.Scene(engine);
+    scene.debugLayer.show();
     /*--  CAMERA --*/
     const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 10, new BABYLON.Vector3(0, 0, 0));
     camera.attachControl(canvas, true);
