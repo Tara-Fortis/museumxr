@@ -93,7 +93,7 @@ const createScene = async function () {
     button1.background = "black";
     button1.cornerRadius = 40;
     button1.thickness = 4;
-    advancedTexture1.addControl(button);
+    advancedTexture1.addControl(button1);
     return scene;
 };
 createScene().then((scene) => {
