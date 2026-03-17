@@ -55,7 +55,7 @@ const createScene = async function () {
     // position
     aphroditeMesh.position = new BABYLON.Vector3(-3.50, 1.00, 3.00);
     // scale aphrodite up
-    aphroditeMesh.scaling = new BABYLON.Vector3(0.10, 0.10, 0.10);
+    aphroditeMesh.scaling = new BABYLON.Vector3(1, 1, 1);
     // shadow
 
     /*-- BUST OF ZEUS --*/
@@ -64,7 +64,7 @@ const createScene = async function () {
     // position
     zeusMesh.position = new BABYLON.Vector3(4.00, 1.00, -4.00);
     // scale zeus down
-    zeusMesh.scaling = new BABYLON.Vector3(1.30, 1.30, 1.30);
+    zeusMesh.scaling = new BABYLON.Vector3(0.30, 0.30, 0.30);
     // shadow
 
     /*-- NIKE STATUE --*/
@@ -72,8 +72,6 @@ const createScene = async function () {
     let nikeMesh = nike.meshes[0];
     // position
     nikeMesh.position = new BABYLON.Vector3(4.00, 1.00, 3.00);
-    // scale nike up
-    nikeMesh.scaling = new BABYLON.Vector3(0.50, 0.50, 0.50);
 
     // shadow
 
