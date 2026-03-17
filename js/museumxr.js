@@ -36,7 +36,7 @@ const createScene = async function () {
     room.position.y = 4.9;
 
     /*--  MESHES --*/
-    // add four boxes to represent the museum exhibits
+    // add three podiums under each statue
     // exhibit 1 (Crouching Aphrodite)
     const box1 = BABYLON.MeshBuilder.CreateBox("box1", {}, scene);
     box1.position = new BABYLON.Vector3(-3.50, 0.50, 3.00);
@@ -86,7 +86,22 @@ const createScene = async function () {
 
 
     /*--  GUI --*/
+    // button 1
+    const plane1 = BABYLON.MeshBuilder.CreatePlane("plane1", {width: 1});
+    plane1.parent = box1;
+    plane1.position.z = -0.51;
 
+    const advancedTexture1 = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(plane1);
+
+    const button = BABYLON.GUI.Button.CreateSimpleButton("but", "Audio Description");
+    button.width = 0.7;
+    button.height = "60px";
+    button.color = "white";
+    button.fontSize = "50px"
+    button.background = "black";
+    button.cornerRadius = 40;
+    button.thickness = 4;
+    advancedTexture1.addControl(button);  
     return scene;
 };
 createScene().then((scene) => {
