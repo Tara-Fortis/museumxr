@@ -59,57 +59,53 @@ const createScene = async function () {
     nike.meshes[0].scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
 
     /*------------------------------------- MESH LABELS -------------------------------------*/
-    // == Zeus ==
-    const zeusPlane = BABYLON.MeshBuilder.CreatePlane("zeusMesh", { size: 1 });
-    zeusPlane.parent = box2;
-    // move plane infront of box
-    zeusPlane.position.y = 0.3;
-    zeusPlane.position.z = -0.51;
-    const zeusAdvancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(zeusPlane);
+    // note: this function was suggesting by copiolot
+    function createMeshLabel(mesh, text, options = {}) {
+        const {
+            width = 0.4,
+            height = "80px",
+            fontSize = "70px",
+            background = "white",
+            color = "black",
+            thickness = 4,
+            offset = new BABYLON.Vector3(0, 0.1, -0.51),
+            rotationY = 0
+        } = options;
 
-    // Create a GUI Rectangle
-    const zeusRectangle = new BABYLON.GUI.Rectangle();
-    zeusRectangle.width = 0.4;
-    zeusRectangle.height = "80px";
-    zeusRectangle.fontSize = "70px";
-    zeusRectangle.color = "black";
-    zeusRectangle.thickness = 4;
-    zeusRectangle.background = "white";
+        // Create plane
+        const plane = BABYLON.MeshBuilder.CreatePlane(mesh.name + "_labelPlane", { size: 1 });
+        plane.parent = mesh;
+        plane.position = offset;
+        plane.rotation.y = rotationY;
 
-    zeusAdvancedTexture.addControl(zeusRectangle);
+        // GUI texture
+        const texture = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(plane);
 
-    // add lable to the rectangle
-    const zeusLabel = new BABYLON.GUI.TextBlock();
-    zeusLabel.text = "Bust of Zeus";
-    zeusRectangle.addControl(zeusLabel);
-    
-    // == NIKE ==
-    const nikePlane = BABYLON.MeshBuilder.CreatePlane("nikeMesh", { size: 1 });
-    nikePlane.parent = box3;
-    // move plane infront of box
-    nikePlane.position.y = 0.3;
-    nikePlane.position.z = -0.51;
-    const nikeAdvancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(nikePlane);
-    
-    // Create a GUI Rectangle
-    const nikeRectangle = new BABYLON.GUI.Rectangle();
-    nikeRectangle.width = 0.4;
-    nikeRectangle.height = "80px";
-    nikeRectangle.fontSize = "70px";
-    nikeRectangle.color = "black";
-    nikeRectangle.thickness = 4;
-    nikeRectangle.background = "white";
+        // Rectangle
+        const rect = new BABYLON.GUI.Rectangle();
+        rect.width = width;
+        rect.height = height;
+        rect.fontSize = fontSize;
+        rect.color = color;
+        rect.thickness = thickness;
+        rect.background = background;
+        texture.addControl(rect);
 
-    nikeAdvancedTexture.addControl(nikeRectangle);
+        // Text
+        const label = new BABYLON.GUI.TextBlock();
+        label.text = text;
+        rect.addControl(label);
 
-    // add a label to the rectangle
-    const nikeLabel = new BABYLON.GUI.TextBlock();
-    nikeLabel.text = "Nike of Samothrace";
-    nikeRectangle.addControl(nikeRectangle);
+        return plane;
+    }
+    createMeshLabel(box2, "Bust of Zeus");
+    createMeshLabel(box3, "Nike of Samothrace");
+    createMeshLabel(aphrodite.meshes[0], "Aphrodite", {
+        offset: new BABYLON.Vector3(0, -0.1, 0.6),
+        rotationY: Math.PI
+    });
 
 
-    // Aphrodite
-    
     return scene;
 };
 
