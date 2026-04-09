@@ -55,7 +55,8 @@ const createScene = async function () {
     // shadow
 
     /*-- BUST OF ZEUS --*/
-    const zeus = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "colossal_marble_bust_of_zeus.glb")
+    const zeus = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "colossal_marble_bust_of_zeus.glb");
+    // retrieved from: https://sketchfab.com/3d-models/colossal-marble-bust-of-zeus-update-16-3e4e5e9035b247c4b9cdb3ebf66951e5
     let zeusMesh = zeus.meshes[0];
     // position
     zeusMesh.position = new BABYLON.Vector3(4.00, 1.00, -4.00);
@@ -65,6 +66,7 @@ const createScene = async function () {
 
     /*-- NIKE STATUE --*/
     const nike = await BABYLON.SceneLoader.ImportMeshAsync("", "./meshes/", "nike_of_samothrace.glb");
+    // retrieved from: https://sketchfab.com/3d-models/aphrodite-crouching-at-her-bath-better-854db6363e0b4957a93f8db4790510ec
     let nikeMesh = nike.meshes[0];
     // position
     nikeMesh.position = new BABYLON.Vector3(4.00, 1.00, 3.00);
@@ -76,6 +78,7 @@ const createScene = async function () {
     /*--  GUI --*/
     // button 1 for The bust of Zeus
     const plane1 = BABYLON.MeshBuilder.CreatePlane("plane1", { width: 1 });
+    // retrieved from: https://sketchfab.com/3d-models/nike-of-samothrace-51fdc0b0632749afbd67c943119f7bcc
     plane1.parent = box2;
     plane1.position.z = -0.51;
 
