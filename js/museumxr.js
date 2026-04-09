@@ -59,17 +59,18 @@ const createScene = async function () {
     nike.meshes[0].scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
 
     /*------------------------------------- MESH LABELS -------------------------------------*/
-    // note: this function was suggesting by copiolot
     function createMeshLabel(mesh, text, options = {}) {
         const {
-            width = 0.4,
+            width = 0.6,
             height = "80px",
             fontSize = "70px",
             background = "white",
             color = "black",
             thickness = 4,
             offset = new BABYLON.Vector3(0, 0.1, -0.51),
-            rotationY = 0
+            rotationY = 0,
+            soundFile = null,
+            scene = null
         } = options;
 
         // Create plane
@@ -91,18 +92,55 @@ const createScene = async function () {
         rect.background = background;
         texture.addControl(rect);
 
-        // Text
+        // Label Text
         const label = new BABYLON.GUI.TextBlock();
         label.text = text;
         rect.addControl(label);
 
+        // Button
+        const button = BABYLON.GUI.Button.CreateSimpleButton(mesh.name + "_button", "▶ play");
+        button.width = "200px";
+        button.height = "60px";
+        button.color = "white";
+        button.background = "black";
+        button.fontSize = "50px";
+        button.top = "80px";
+        // add button to the same texture
+        texture.addControl(button);
+
+        // Sound
+        let sound = null;
+        if (soundFile && scene) {
+            sound = new BABYLON.Sound(mesh.name + "_sound", soundFile, scene, null, {
+                autoplay: false
+            });
+        }
+
+        // when button is clicked play the sound
+        button.onPointerUpObservable.add(() => {
+            if (BABYLON.Engine.audioEngine) {
+                BABYLON.Engine.audioEngine.unlock();
+            }
+            if (sound) {
+                sound.play();
+            }
+        });
         return plane;
     }
-    createMeshLabel(box2, "Bust of Zeus");
-    createMeshLabel(box3, "Nike of Samothrace");
+    createMeshLabel(box2, "Bust of Zeus", {
+        scene: scene,
+        soundFile: "./audio/Bust-of-zeus.mp3"
+
+    });
+    createMeshLabel(box3, "Nike of Samothrace", {
+        scene: scene,
+        soundFile: "./audio/Nike-of-samothrace.mp3"
+    });
     createMeshLabel(aphrodite.meshes[0], "Aphrodite", {
-        offset: new BABYLON.Vector3(0, -0.1, 0.6),
-        rotationY: Math.PI
+        offset: new BABYLON.Vector3(0, -0.1, 0.55),
+        rotationY: Math.PI,
+        scene: scene,
+        soundFile: "./audio/Crouching-aphrodite.mp3"
     });
 
 
