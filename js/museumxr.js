@@ -75,7 +75,7 @@ const createScene = async function () {
     /*--  GUI --*/
     // button 1
     const plane1 = BABYLON.MeshBuilder.CreatePlane("plane1", {width: 1});
-    plane1.parent = box1;
+    plane1.parent = box2;
     plane1.position.z = -0.51;
 
     const advancedTexture1 = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(plane1);
