@@ -4,6 +4,7 @@ const engine = new BABYLON.Engine(canvas, true);
 const createScene = async function () {
 
     const scene = new BABYLON.Scene(engine);
+    // scene.debugLayer.show();
     /*--  CAMERA --*/
     const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 10, new BABYLON.Vector3(0, 0, 0));
     camera.attachControl(canvas, true);
@@ -73,22 +74,78 @@ const createScene = async function () {
 
 
     /*--  GUI --*/
-    // button 1
-    const plane1 = BABYLON.MeshBuilder.CreatePlane("plane1", {width: 1});
+    // button 1 for The bust of Zeus
+    const plane1 = BABYLON.MeshBuilder.CreatePlane("plane1", { width: 1 });
     plane1.parent = box2;
     plane1.position.z = -0.51;
 
     const advancedTexture1 = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(plane1);
 
-    const button1 = BABYLON.GUI.Button.CreateSimpleButton("buttton1", "Audio Description");
+    const button1 = BABYLON.GUI.Button.CreateSimpleButton("buttton1", "play audio");
     button1.width = 0.7;
-    button1.height = "60px";
+    button1.height = "90px";
     button1.color = "white";
-    button1.fontSize = "50px"
+    button1.fontSize = "70px"
     button1.background = "black";
     button1.cornerRadius = 40;
     button1.thickness = 4;
     advancedTexture1.addControl(button1);
+
+    // label 1 for the bust of zeus
+    const zeusPlane = BABYLON.Mesh.CreatePlane("zeusPlane", 1);
+    zeusPlane.parent = box2;
+    zeusPlane.position = new BABYLON.Vector3(0, 0.2, -0.51);
+
+    const zeusTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(zeusPlane);
+    const zeusRectangle = new BABYLON.GUI.Rectangle();
+    zeusRectangle.width = 0.4;
+    zeusRectangle.height = "80px";
+    zeusRectangle.fontSize = "65px"
+    zeusRectangle.color = "black";
+    zeusRectangle.thickness = 4;
+
+    zeusTexture.addControl(zeusRectangle);
+
+    const zeusLabel = new BABYLON.GUI.TextBlock();
+    zeusLabel.text = "Bust of Zeus";
+    zeusRectangle.addControl(zeusLabel);
+
+
+    // button 2 For the Nike Statue
+    const plane2 = BABYLON.MeshBuilder.CreatePlane("plane2", { width: 1 });
+    plane2.parent = box3;
+    plane2.position.z = -0.51;
+
+    const advancedTexture2 = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(plane2);
+
+    const button2 = BABYLON.GUI.Button.CreateSimpleButton("button2", "play audio");
+    button2.height = "100px";
+    button2.width = 0.5;
+    button2.color = "white";
+    button2.fontSize = "70px"
+    button2.background = "black";
+    button2.cornerRadius = 40;
+    button2.thickness = 4;
+    advancedTexture2.addControl(button2);
+
+    // label for the statue of nike
+    const nikePlane = BABYLON.Mesh.CreatePlane("nikePlane", 1);
+    nikePlane.parent = box3;
+    nikePlane.position = new BABYLON.Vector3(0, 0.2, -0.51);
+
+    const nikeTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(nikePlane);
+    const nikeRectangle = new BABYLON.GUI.Rectangle();
+    nikeRectangle.width = 0.7;
+    nikeRectangle.height = "90px";
+    nikeRectangle.fontSize = "75px"
+    nikeRectangle.color = "black";
+    nikeRectangle.thickness = 4;
+
+    nikeTexture.addControl(nikeRectangle);
+
+    const nikeLabel = new BABYLON.GUI.TextBlock();
+    nikeLabel.text = "Nike of Samothrace";
+    nikeRectangle.addControl(nikeLabel);
     return scene;
 };
 createScene().then((scene) => {
