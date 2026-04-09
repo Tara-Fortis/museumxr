@@ -110,6 +110,25 @@ const createScene = async function () {
     zeusLabel.text = "Bust of Zeus";
     zeusRectangle.addControl(zeusLabel);
 
+    // Add audio to button
+    let zeusMouseClick;
+    let audioEngine;
+    (async () => {
+        audioEngine = await BABYLON.CreateAudioEngineAsync();
+        zeusMouseClick = await BABYLON.CreateSoundAsync(
+            "zeusMouseClick",
+            "audio/mouse-click-sound.mp3"
+        );
+    })();
+
+    // PLAY SOUND
+    button1.onPointerClickObservable.add(async () => {
+        await audioEngine.unlockAsync();
+        if (zeusMouseClick) {
+            zeusMouseClick.play();
+        }
+    });
+
 
     // button 2 For the Nike Statue
     const plane2 = BABYLON.MeshBuilder.CreatePlane("plane2", { width: 1 });
@@ -146,6 +165,26 @@ const createScene = async function () {
     const nikeLabel = new BABYLON.GUI.TextBlock();
     nikeLabel.text = "Nike of Samothrace";
     nikeRectangle.addControl(nikeLabel);
+
+    // Add audio to button
+    let nikeMouseClick;
+    (async () => {
+        const audioEngine = await BABYLON.CreateAudioEngineAsync();
+        nikeMouseClick = await BABYLON.CreateSoundAsync(
+            "nikeMouseClick",
+            "audio/mouse-click-sound.mp3"
+        );
+
+        await audioEngine.unlockAsync();
+    })();
+
+    // PLAY SOUND
+    button2.onPointerClickObservable.add(() => {
+        if (nikeMouseClick) {
+            nikeMouseClick.play();
+        }
+    });
+
     return scene;
 };
 createScene().then((scene) => {
