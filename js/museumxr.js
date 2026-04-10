@@ -58,40 +58,54 @@ const createScene = async function () {
     nike.meshes[0].position = new BABYLON.Vector3(4.0, 1.0, 3.0);
     nike.meshes[0].scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
 
-    /*------------------------------------- MESHES -------------------------------------*/
-    // button 1 for The bust of Zeus
-    const zeusPlane = BABYLON.MeshBuilder.CreatePlane("zeusPlane", { width: 1 });
-    zeusPlane.parent = box2;
-    zeusPlane.position.z = -0.51;
-
-    const zeusTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(zeusPlane);
-
-    const zeusButton = BABYLON.GUI.Button.CreateSimpleButton("zeusButton", "play audio");
-    zeusButton.width = 0.7;
-    zeusButton.height = "90px";
-    zeusButton.color = "white";
-    zeusButton.fontSize = "70px"
-    zeusButton.background = "black";
-    zeusButton.cornerRadius = 40;
-    zeusButton.thickness = 4;
-    zeusTexture.addControl(zeusButton);
-
-    // Add audio to button
-
-    const audioEngine = await BABYLON.CreateAudioEngineAsync();
-
-    const zeusMouseClick = await BABYLON.CreateSoundAsync(
-        "zeusMouseClick",
-        "audio/Bust-of-zeus.mp3"
-    );
-
-    // PLAY SOUND
-    zeusButton.onPointerClickObservable.add(async () => {
-        if (audioEngine) {
-            await audioEngine.unlockAsync();
+    /*------------------------------------- MESH ARRAY -------------------------------------*/
+    const exhibits = [
+        {
+            name: "Bust of Zeus",
+            mesh: box2,
+            sound: "audio/Bust-of-zeus.mp3"
+        },
+        {
+            name: "Nike of Samothrace",
+            mesh: box3,
+            sound: "audio/Nike-of-samothrace.mp3"
+        },
+        {
+            name: "Aphrodite",
+            mesh: aphrodite.meshes[0],
+            sound: "audio/Crouching-aphrodite.mp3"
         }
-        zeusMouseClick?.play();
-    });
+    ];
+
+    for (const exhibit of exhibits) {
+        const audioEngine = await BABYLON.CreateAudioEngineAsync();
+        const sound = await BABYLON.CreateSoundAsync(
+            exhibit.name,
+            exhibit.sound
+        );
+
+        const plane = BABYLON.MeshBuilder.CreatePlane(exhibit.name + "_plane", { width: 1 });
+        plane.parent = exhibit.mesh;
+        plane.position.z = -0.51;
+
+        const texture = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(plane);
+
+        const button = BABYLON.GUI.Button.CreateSimpleButton(exhibit.name + "_button", "play audio");
+        button.width = 0.7;
+        button.height = "90px";
+        button.color = "white";
+        button.background = "black";
+        button.fontSize = "70px";
+
+        texture.addControl(button);
+
+        button.onPointerClickObservable.add(async () => {
+            if (sound) {
+                sound.stop();
+                sound.play();
+            }
+        });
+    }
 
     return scene;
 };
