@@ -79,6 +79,10 @@ const createScene = async function () {
 
     const audioEngine = await BABYLON.CreateAudioEngineAsync();
 
+    canvas.addEventListener("pointerdown", async () => {
+    await audioEngine.unlockAsync();
+}, { once: true });
+
     for (const exhibit of exhibits) {
         const sound = await BABYLON.CreateSoundAsync(
             exhibit.name,
