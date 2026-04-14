@@ -77,8 +77,9 @@ const createScene = async function () {
         }
     ];
 
+    const audioEngine = await BABYLON.CreateAudioEngineAsync();
+
     for (const exhibit of exhibits) {
-        const audioEngine = await BABYLON.CreateAudioEngineAsync();
         const sound = await BABYLON.CreateSoundAsync(
             exhibit.name,
             exhibit.sound
@@ -107,13 +108,17 @@ const createScene = async function () {
         });
     }
 
-    const xr = await scene.createDefaultXRExperienceAsync({
-        uiOptions: {
-            sessionMode: "immersive-vr",
-            referenceSpaceType: "local-floor"
-        },
-        optionalFeatures: ["local-floor"]
-    });
+    if (await BABYLON.WebXRSessionManager.IsSessionSupportedAsync("immersive-vr")) {
+        const xr = await scene.createDefaultXRExperienceAsync({
+            uiOptions: {
+                sessionMode: "immersive-vr"
+            },
+            floorMeshes: [ground],
+            optionalFeatures: ["local-floor"]
+        });
+    } else {
+        console.log("WebXR is not supported on this device.");
+    }
 
     return scene;
 };
