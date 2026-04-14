@@ -107,6 +107,14 @@ const createScene = async function () {
         });
     }
 
+    const xr = await scene.createDefaultXRExperienceAsync({
+        uiOptions: {
+            sessionMode: "immersive-ar",
+            referenceSpaceType: "local" 
+        },
+        optionalFeatures: true
+    });
+
     return scene;
 };
 
