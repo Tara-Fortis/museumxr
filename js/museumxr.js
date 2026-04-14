@@ -109,10 +109,10 @@ const createScene = async function () {
 
     const xr = await scene.createDefaultXRExperienceAsync({
         uiOptions: {
-            sessionMode: "immersive-ar",
-            referenceSpaceType: "local" 
+            sessionMode: "immersive-vr",
+            referenceSpaceType: "local-floor"
         },
-        optionalFeatures: true
+        optionalFeatures: ["local-floor"]
     });
 
     return scene;
